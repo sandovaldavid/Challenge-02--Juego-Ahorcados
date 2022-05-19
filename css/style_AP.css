@@ -1,0 +1,9 @@
+.panel-1{
+    margin: 2em auto;
+}
+#texto{
+    width: 60%;
+    margin: 2em auto 0;
+    display: block;
+    font-size: 32px;
+}
