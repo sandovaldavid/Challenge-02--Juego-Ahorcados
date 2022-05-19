@@ -13,6 +13,7 @@
     border: 0px;
 }
 ::placeholder { color: #0A3871; }
+
 #texto:focus{
     outline: 0 none;
 }
