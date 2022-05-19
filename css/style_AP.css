@@ -39,6 +39,7 @@
 }
 #b_cancelar{
     border: 1px solid #0A3871;
+    background: #F3F5FC ;
     color: #0A3871;
     position: relative;
     right: -10%;
