@@ -44,3 +44,14 @@
     position: relative;
     right: -10%;
 }
+.boton:hover{
+    opacity: 0.9;
+    transition: 0.2s;
+    padding: 0;
+    font-size: 18px;
+}
+.boton:active{
+    padding: 0;
+    font-size: 20px;
+    transition: 0.2s;
+}
