@@ -12,7 +12,7 @@ main{
 #b1{
     width: 320px;
     height: 80px;
-    margin: 15em auto 2em ;
+    margin: 25% auto 2em ;
     font-size: 18px;
     color: white;
     background: #0A3871;
@@ -22,7 +22,7 @@ main{
 #b2{
     width: 280px;
     height: 40px;
-    margin: 2em auto 15em;
+    margin: 2em auto 30%;
     font-size: 16px;
     color: #0A3871;
     border: 1px solid #0A3871;
