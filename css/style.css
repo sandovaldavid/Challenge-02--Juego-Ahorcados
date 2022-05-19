@@ -1,6 +1,15 @@
 header{
     margin: 40px 0 0 40px;
 }
+main{
+    width: 940px;
+    height: auto;
+    margin: auto;
+}
+.botones{
+    display: block;
+    margin: 0 auto;
+}
 .datos {
     width: 400px;
     margin: 3em auto 0 auto;
