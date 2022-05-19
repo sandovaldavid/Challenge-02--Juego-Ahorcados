@@ -7,3 +7,12 @@
     display: block;
     font-size: 32px;
 }
+.mensaje-error, .caja-botones{
+    width: 60%;
+    margin: 0 auto;
+}
+.boton{
+    width: 45%;
+    height: 60px;
+    font-size: 16px;
+}
