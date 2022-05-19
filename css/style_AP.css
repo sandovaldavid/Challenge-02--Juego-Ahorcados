@@ -12,6 +12,10 @@
     resize: none;
     border: 0px;
 }
+::placeholder { color: #0A3871; }
+#texto:focus{
+    outline: 0 none;
+}
 .mensaje-error, .caja-botones{
     width: 60%;
     margin: 0 auto;
