@@ -1,0 +1,13 @@
+#panel-juego{
+    width: 100%;
+}
+#panel-dibujo{
+    width: 300px;
+    height: 360px;
+    margin: 0 auto;
+}
+canvas{
+    position: relative;
+    background: #F3F5FC;
+    margin: 0 auto;
+}
