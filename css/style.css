@@ -12,6 +12,9 @@ main{
 .botones{
     display: block;
 }
+a{
+    text-decoration: none;
+}
 #b1{
     width: 320px;
     height: 80px;
