@@ -6,13 +6,24 @@
     <title>Juego de Ahorcados</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_J.css">
 </head>
 <body>
     <header>
         <img id="logo" src="img/Logo.png">
     </header>
     <main>
-        
+        <div id="panel-juego">
+            <div id="panel-dibujo"><canvas id="dibujo" width="300px" height="360px">
+
+            </canvas></div>
+            <div id="panel-palabra"><p id="palabra">
+
+            </p></div>
+            <div id="panel-lineas"><canvas id="lineas">
+
+            </canvas></div>
+        </div>
         <footer class="datos">
             <div class="cajas">
                 <a href="https://github.com/SandovalDavid"><img id="github" src="img/GitHub.png" class="imagenes" ></a><p class="nombre">GitHub</p>
@@ -29,5 +40,6 @@
             <p class="creador">Abril-2022 Sandoval David</p>
         </footer>
     </main>
+    <script src="js/dibujo.js"></script>
 </body>
 </html>
