@@ -11,3 +11,41 @@ canvas{
     background: #F3F5FC;
     margin: 0 auto;
 }
+#panel-palabra, #panel-letra-erronea{
+    width: 100%;
+    padding: 1em 0px;
+    text-align: center;
+}
+.letra{
+    text-decoration: underline;
+}
+.letra, .letraError{
+    display: inline-block;
+    padding: 5px;
+    padding: 5px;
+    margin: 10px;
+    color: #0A3871;
+    font-size: 48px;
+    font-family: 'Inter';
+    font-style: normal;
+
+}
+.letraError{
+    color: #495057;
+    font-size: 24px;
+}
+#panel-mensaje{
+    position: relative;
+    top: -422px;
+    left: 621px;
+    width: 300px;
+}
+.mensaje{
+    background: gray;
+    color: white;
+    font-size: 30px;
+    display: inline-block;
+    text-align: center;
+    padding: 1em 0;
+    border-radius: 20px;
+}
