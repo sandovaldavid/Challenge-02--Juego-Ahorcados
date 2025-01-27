@@ -1,4 +1,3 @@
-
 var palabra_seleccionada = palabras_predeterminadas[numero_random()];
 var letras = palabra_seleccionada.length;
 var ID_letra =["L1","L2","L3","L4","L5","L6","L7","L8"];
@@ -17,8 +16,6 @@ var letras_correctas_no_repetir = [];
 for(var i=0 ; i<letras ; i++){
     letra.appendChild(construir_P("_","letra",ID_letra[i]));
 }
-     
-
 
 //------dibujo.js--------
 var pantalla_dibujo = document.querySelector("#dibujo");
@@ -39,12 +36,11 @@ var xy_dibujo = [
     [250,110,290,160],
     [250,240,210,290],
     [250,240,290,290]
-    ]  
-    const endGame = () => {
-        document.removeEventListener('keydown', event);
-        //startButton.style.display = 'block';
-        //wordButton.style.display = 'block';
-    }
+]  
+    
+function endGame() {
+    document.removeEventListener('keydown', letterEvent);
+}
     
     const letterEvent = event => {
         
