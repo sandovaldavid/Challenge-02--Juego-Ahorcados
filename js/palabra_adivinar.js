@@ -66,6 +66,7 @@ function letterEvent(event) {
             if (!letras_correctas_no_repetir.includes(letra)) {
                 letra_correcta++;
                 letras_correctas_no_repetir.push(letra);
+                console.log(`Letras correctas: ${letra_correcta} de ${letras}`); // Debug
             }
         }
     }
@@ -86,16 +87,25 @@ function validar_letra(letra) {
 
 function verificarFinJuego() {
     const mensaje = document.querySelector("#panel-mensaje");
+    while (mensaje.firstChild) {
+        mensaje.removeChild(mensaje.firstChild);
+    }
+
     if (letra_correcta === letras) {
+        document.removeEventListener('keydown', letterEvent);
         valor_teclado = true;
         mensaje.appendChild(construir_P("¡Felicidades Ganaste!", "mensaje", "ganaste"));
-        endGame();
+        console.log("Juego terminado - Victoria"); // Debug
     } else if (iI >= xy_dibujo.length) {
+        document.removeEventListener('keydown', letterEvent);
         valor_teclado = true;
         mensaje.appendChild(construir_P(`¡Perdiste! La palabra era: ${palabra_seleccionada}`, "mensaje", "perdiste"));
-        endGame();
+        console.log("Juego terminado - Derrota"); // Debug
     }
 }
+
+// Asegurarnos que el evento se registra correctamente al inicio
+document.addEventListener('keydown', letterEvent);
 
 function construir_P(texto,clase,id){
     var p = document.createElement("p");
