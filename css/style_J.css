@@ -34,13 +34,16 @@ canvas{
     color: #495057;
     font-size: 24px;
 }
-#panel-mensaje{
+
+#panel-mensaje {
     position: relative;
     top: -422px;
     left: 621px;
     width: 300px;
+    z-index: 1;
 }
-.mensaje{
+
+.mensaje {
     background: gray;
     color: white;
     font-size: 30px;
@@ -48,4 +51,5 @@ canvas{
     text-align: center;
     padding: 1em 0;
     border-radius: 20px;
+    width: 100%;
 }
