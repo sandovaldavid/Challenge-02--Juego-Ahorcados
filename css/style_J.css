@@ -53,3 +53,20 @@ canvas{
     border-radius: 20px;
     width: 100%;
 }
+
+.boton-volver {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background: #0A3871;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.boton-volver:hover {
+    opacity: 0.9;
+    transition: 0.2s;
+}
