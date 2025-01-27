@@ -59,16 +59,20 @@ function letterEvent(event) {
     if (letras_Error.includes(letra)) return;
 
     let encontrado = false;
+    let letrasEncontradas = 0;  // Counter for found letters in this turn
+
     for (let i = 0; i < letras; i++) {
         if (palabra_seleccionada[i].toUpperCase() === letra) {
             document.getElementById(ID_letra[i]).textContent = letra;
             encontrado = true;
-            if (!letras_correctas_no_repetir.includes(letra)) {
-                letra_correcta++;
-                letras_correctas_no_repetir.push(letra);
-                console.log(`Letras correctas: ${letra_correcta} de ${letras}`); // Debug
-            }
+            letrasEncontradas++;  // Count each instance of the letter
         }
+    }
+
+    if (encontrado && !letras_correctas_no_repetir.includes(letra)) {
+        letra_correcta += letrasEncontradas;  // Add all instances found
+        letras_correctas_no_repetir.push(letra);
+        console.log(`Letras correctas: ${letra_correcta} de ${letras}`);
     }
 
     if (!encontrado) {
@@ -92,7 +96,7 @@ function verificarFinJuego() {
     }
 
     if (letra_correcta === letras) {
-        document.removeEventListener('keydown', letterEvent);
+        endGame();
         valor_teclado = true;
         let contenedor = document.createElement("div");
         contenedor.appendChild(construir_P("¡Felicidades Ganaste!", "mensaje", "ganaste"));
@@ -100,7 +104,7 @@ function verificarFinJuego() {
         mensaje.appendChild(contenedor);
         console.log("Juego terminado - Victoria");
     } else if (iI >= xy_dibujo.length) {
-        document.removeEventListener('keydown', letterEvent);
+        endGame();
         valor_teclado = true;
         let contenedor = document.createElement("div");
         contenedor.appendChild(construir_P(`¡Perdiste! La palabra era: ${palabra_seleccionada}`, "mensaje", "perdiste"));
@@ -114,7 +118,15 @@ function construirBotonVolver() {
     const boton = document.createElement("button");
     boton.textContent = "Volver al Inicio";
     boton.classList.add("boton-volver");
-    boton.onclick = () => window.location.href = 'index.html';
+    boton.onclick = () => {
+        valor_teclado = false;
+        letra_correcta = 0;
+        letras_Error = [];
+        letras_correctas_no_repetir = [];
+        iE = 0;
+        iI = 0;
+        window.location.href = 'index.html';
+    };
     return boton;
 }
 
