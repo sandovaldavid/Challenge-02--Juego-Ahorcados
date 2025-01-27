@@ -28,15 +28,21 @@ var pincel = pantalla_dibujo.getContext("2d");
     pincel.stroke();
 
 var xy_dibujo = [
-    [80,350,80,10],
-    [79,10,251,10],
-    [250,10,250,50],
-    [250,110,250,240],
-    [250,110,210,160],
-    [250,110,290,160],
-    [250,240,210,290],
-    [250,240,290,290]
-]  
+    [80, 350, 80, 10],     // poste vertical
+    [79, 10, 251, 10],     // poste horizontal superior
+    [250, 10, 250, 50],    // soga
+    {                    // cabeza (círculo)
+        type: 'circle',
+        x: 250,
+        y: 80,
+        radius: 30
+    },
+    [250, 110, 250, 240],  // cuerpo
+    [250, 110, 210, 160],  // brazo izquierdo
+    [250, 110, 290, 160],  // brazo derecho
+    [250, 240, 210, 290],  // pierna izquierda
+    [250, 240, 290, 290]   // pierna derecha
+]; 
     
 function endGame() {
     document.removeEventListener('keydown', letterEvent);
@@ -50,7 +56,6 @@ function letterEvent(event) {
     let letra = event.key.toUpperCase();
     if (!validar_letra(letra)) return;
 
-    // Skip if letter was already tried
     if (letras_Error.includes(letra)) return;
 
     let encontrado = false;
@@ -68,8 +73,8 @@ function letterEvent(event) {
     if (!encontrado) {
         letras_Error.push(letra);
         letraError.appendChild(construir_P(letra, "letraError", "LE" + iE++));
-        dibujarError();
         iI++;
+        dibujarError();
     }
 
     verificarFinJuego();
@@ -103,9 +108,15 @@ function construir_P(texto,clase,id){
 function dibujarError() {
     if (iI >= xy_dibujo.length) return;
 
-    let coords = xy_dibujo[iI];
+    let figura = xy_dibujo[iI];
     pincel.beginPath();
-    pincel.moveTo(coords[0], coords[1]);
-    pincel.lineTo(coords[2], coords[3]);
+
+    if (figura.type === 'circle') {
+        pincel.arc(figura.x, figura.y, figura.radius, 0, Math.PI * 2);
+    } else {
+        pincel.moveTo(figura[0], figura[1]);
+        pincel.lineTo(figura[2], figura[3]);
+    }
+
     pincel.stroke();
 }
