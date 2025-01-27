@@ -1,26 +1,17 @@
-
-var palabras_predeterminadas =["papa", "mochila", "alura", "papelera","teclado","pantalla","celular","pie","muerte","pincel"];
+var palabras_predeterminadas = ["papa", "mochila", "alura", "papelera", "teclado", "pantalla", "celular", "pie", "muerte", "pincel"];
 var cantidad_palabras = palabras_predeterminadas.length;
-var numeros =[];
+var numeros = [];
 
-function numero_random(){
-    var random = 0;
-    var valor = true;
-    if(numeros.length == 0){    
-        random = Math.floor(Math.random()*(cantidad_palabras));
-        numeros.push(random);
+function numero_random() {
+    if (numeros.length >= cantidad_palabras) {
+        numeros = [];
     }
-    else{
-        while(valor == true){
-            random = Math.floor(Math.random()*(cantidad_palabras));
-                if(numeros.includes(random)){
-                    valor = true;
-                }
-                else{
-                    valor = false;
-                    numeros.push(random);
-                }
-        }
-    }
+
+    let random;
+    do {
+        random = Math.floor(Math.random() * cantidad_palabras);
+    } while (numeros.includes(random));
+
+    numeros.push(random);
     return random;
 }
