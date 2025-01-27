@@ -41,82 +41,56 @@ var xy_dibujo = [
 function endGame() {
     document.removeEventListener('keydown', letterEvent);
 }
-    
-    const letterEvent = event => {
-        
-    
-    };
-    document.addEventListener('keydown', (event) => {
-        var keyValue = event.key;
-        var codeValue = event.code;
-    
-        if(validar_letra(keyValue)){
-            var i = 0;
-            var j = 0;
-            var ref = 0;
-            while(i<letras){
-                var letra_p = palabra_seleccionada.charAt(i);
-                if(keyValue.toUpperCase() == letra_p.toUpperCase()  && letra_correcta<=letras){
-                    var p = document.getElementById(ID_letra[i]);
-                    p.innerHTML = letra_p.toUpperCase();
-                    j++;
-                    if(!letras_correctas_no_repetir.includes(keyValue)){
-                        letra_correcta++;
-                    }
-                }
-                i++;     
+
+document.addEventListener('keydown', letterEvent);
+
+function letterEvent(event) {
+    if (valor_teclado) return;
+
+    let letra = event.key.toUpperCase();
+    if (!validar_letra(letra)) return;
+
+    // Skip if letter was already tried
+    if (letras_Error.includes(letra)) return;
+
+    let encontrado = false;
+    for (let i = 0; i < letras; i++) {
+        if (palabra_seleccionada[i].toUpperCase() === letra) {
+            document.getElementById(ID_letra[i]).textContent = letra;
+            encontrado = true;
+            if (!letras_correctas_no_repetir.includes(letra)) {
+                letra_correcta++;
+                letras_correctas_no_repetir.push(letra);
             }
-            if(j>0){
-                letras_correctas_no_repetir.push(keyValue);
-                console.log(letras_correctas_no_repetir);
-            }
-            
-            if(j==0){
-                //acciones de dibujo y a;adir letra errorea, ojo hay que crear otro div que contenga las letras erroneas con una etiqueta p
-                    //Ahnadir letra incorrecta
-                    if(!letras_Error.includes(keyValue)){
-                        if(letra_correcta<=letras && iI < 9){ 
-                            letras_Error.push(keyValue);
-                            var idError = "LE"+iE;
-                            letraError.appendChild(construir_P("","letraError",idError));
-                            var p = document.getElementById(idError);
-                            p.innerHTML = keyValue.toUpperCase();
-                            iE++;
-                            // dibujo
-                            if(iE != 4 && iI <9 && letra_correcta <= letras){
-                                console.log(letra_correcta);
-                                pincel.beginPath()
-                                pincel.moveTo(xy_dibujo[iD][0],xy_dibujo[iD][1]);
-                                pincel.lineWidth = 4,5;
-                                pincel.lineTo(xy_dibujo[iD][2],xy_dibujo[iD][3]);
-                                pincel.stroke();
-                                iD++;
-                            }else if(iE == 4 && letra_correcta <= letras){
-                                pincel.beginPath()
-                                pincel.lineWidth = 4,5;
-                                pincel.arc(250, 80, 30,0,2*3.14)
-                                pincel.stroke();
-                            }
-                            iI++;
-                        }
-                    }
-    
-            }
-    
-            var mensaje = document.querySelector("#panel-mensaje");
-                if(letra_correcta == letras){
-                    valor_teclado = true;
-                    mensaje.appendChild(construir_P("!Felicidades Ganaste!","mensaje","ganaste")); 
-                    letra_correcta = 10;
-                    //falta detener el evento de teclado, no se como hacerlo, pensar despues :c
-                }else if(iI == 9){
-                    mensaje.appendChild(construir_P("!Limite de intentos alcanzados, Perdiste!","mensaje","perdiste"));
-                    valor_teclado = true;
-                    iI = 10;
-                }
         }
-            
-      }, false);
+    }
+
+    if (!encontrado) {
+        letras_Error.push(letra);
+        letraError.appendChild(construir_P(letra, "letraError", "LE" + iE++));
+        dibujarError();
+        iI++;
+    }
+
+    verificarFinJuego();
+}
+
+function validar_letra(letra) {
+    return /^[A-Z]$/.test(letra);
+}
+
+function verificarFinJuego() {
+    const mensaje = document.querySelector("#panel-mensaje");
+    if (letra_correcta === letras) {
+        valor_teclado = true;
+        mensaje.appendChild(construir_P("¡Felicidades Ganaste!", "mensaje", "ganaste"));
+        endGame();
+    } else if (iI >= xy_dibujo.length) {
+        valor_teclado = true;
+        mensaje.appendChild(construir_P(`¡Perdiste! La palabra era: ${palabra_seleccionada}`, "mensaje", "perdiste"));
+        endGame();
+    }
+}
 
 function construir_P(texto,clase,id){
     var p = document.createElement("p");
@@ -126,14 +100,12 @@ function construir_P(texto,clase,id){
     return p;
 }
 
+function dibujarError() {
+    if (iI >= xy_dibujo.length) return;
 
-function validar_letra(letra){
-    var letra_codigo = letra.charCodeAt(0);
-    var valor_letra = false;
-    if(((letra_codigo >=65 && letra_codigo <= 90))){
-       valor_letra = true;   
-    }else{
-        valor_letra = false;
-    }
-    return valor_letra;
+    let coords = xy_dibujo[iI];
+    pincel.beginPath();
+    pincel.moveTo(coords[0], coords[1]);
+    pincel.lineTo(coords[2], coords[3]);
+    pincel.stroke();
 }
