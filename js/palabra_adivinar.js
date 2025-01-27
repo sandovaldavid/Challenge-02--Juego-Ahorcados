@@ -94,18 +94,30 @@ function verificarFinJuego() {
     if (letra_correcta === letras) {
         document.removeEventListener('keydown', letterEvent);
         valor_teclado = true;
-        mensaje.appendChild(construir_P("¡Felicidades Ganaste!", "mensaje", "ganaste"));
-        console.log("Juego terminado - Victoria"); // Debug
+        let contenedor = document.createElement("div");
+        contenedor.appendChild(construir_P("¡Felicidades Ganaste!", "mensaje", "ganaste"));
+        contenedor.appendChild(construirBotonVolver());
+        mensaje.appendChild(contenedor);
+        console.log("Juego terminado - Victoria");
     } else if (iI >= xy_dibujo.length) {
         document.removeEventListener('keydown', letterEvent);
         valor_teclado = true;
-        mensaje.appendChild(construir_P(`¡Perdiste! La palabra era: ${palabra_seleccionada}`, "mensaje", "perdiste"));
-        console.log("Juego terminado - Derrota"); // Debug
+        let contenedor = document.createElement("div");
+        contenedor.appendChild(construir_P(`¡Perdiste! La palabra era: ${palabra_seleccionada}`, "mensaje", "perdiste"));
+        contenedor.appendChild(construirBotonVolver());
+        mensaje.appendChild(contenedor);
+        console.log("Juego terminado - Derrota");
     }
 }
 
-// Asegurarnos que el evento se registra correctamente al inicio
-document.addEventListener('keydown', letterEvent);
+function construirBotonVolver() {
+    const boton = document.createElement("button");
+    boton.textContent = "Volver al Inicio";
+    boton.classList.add("boton-volver");
+    boton.onclick = () => window.location.href = 'index.html';
+    return boton;
+}
+
 
 function construir_P(texto,clase,id){
     var p = document.createElement("p");
